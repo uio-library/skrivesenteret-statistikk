@@ -122,7 +122,7 @@ def delete_all_files():
     for file in os.scandir(UPLOAD_FOLDER):
         os.remove(file.path)
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/skrivesenteret/", methods=['GET', 'POST'])
 def skrivesenter():
     delete_all_files()
 
