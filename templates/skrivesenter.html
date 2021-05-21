@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Akademisk skrivesenter</title>
+
+    <style>
+      .statistics {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .flash {
+        color: red;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Akademisk skrivesenter – statistikk</h1>
+
+    <div>
+      <p>
+        Last opp .xlsx- og .csv-filene for å få aggregerte data for henholdsvis veiledningsstatistikk og temastatistikk.
+      </p>
+      <p>
+        Begge filene må lastes opp samtidig og semester må være valgt.
+      </p>
+    </div>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+      <label class=bold for="semester">Velg semester:</label>
+      <select name="semester">
+        <option value="spring">Vår</option>
+        <option value="autumn">Høst</option>
+      </select>
+      <br><br>
+
+      <label class=bold for="consultations">Legg til veiledningsdata som .xlsx:</label>
+      <input type="file" accept=".xlsx" name="consultations"/>
+      <br><br>
+
+      <label class=bold for="topics">Legg til månedlige tematikkdata som .csv:</label>
+      <input type="file" accept=".csv" name="topics"/>
+      <br><br>
+
+      <input type="submit" value="Tell opp">
+      <br><br>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class=flash>
+          {% for message in messages %}
+            <div>{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      {% endwith %}
+    </form>
+
+    {% if consultations_data %}
+      <h3>Opptelte veiledninger ({{consultations_file}})</h3>
+      <div class=statistics>
+        {% for column, list in consultations_data.items() %}
+          <div>
+            <strong>{{column}}</strong>
+            {% for key, value in list.items() %}
+              <div>{{key}}: {{value}}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if topics_data %}
+      <h3>Opptelte tematikker ({{topics_file}}, {{semester}})</h3>
+      <div clas=statistics>
+        {% for activity, value in topics_data.items() %}
+          <div>{{activity}}: {{value}}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </body>
+</html>
