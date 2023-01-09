@@ -1,4 +1,4 @@
-# skrivesenteret
+# skrivesenteret-statistikk
 
 Appen er opprinnelig utviklet av Carina Thanh-Tam Truong og vil fremover vedlikeholdes av [Kristin Botnen](https://www.ub.uio.no/om/ansatte/akademisk-skrivesenter/kristbot/). Den ble deploya på https://ub-www01.uio.no/skrivesenteret/ av [Dan Michael Heggø](https://www.ub.uio.no/om/ansatte/mednat/dsc/dmheggo/).
 
